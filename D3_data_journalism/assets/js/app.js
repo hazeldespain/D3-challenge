@@ -61,17 +61,17 @@ async function makeResponsive() {
     chart.append("g")
         .call(yAxis);
 
-    // // line generator
-    // const line = d3.line()
-    //     .x(d => xLinearScale(d.obesity))
-    //     .y(d => yLinearScale(d.poverty));
+    // line generator
+    const line = d3.line()
+        .x(d => xLinearScale(d.obesity))
+        .y(d => yLinearScale(d.poverty));
 
-    // // append line
-    // chart.append("path")
-    //     .data([csvData])
-    //     .attr("d", line)
-    //     .attr("fill", "none")
-    //     .attr("stroke", "red");
+    // append line
+    chart.append("path")
+        .data([csvData])
+        .attr("d", line)
+        .attr("fill", "none")
+        .attr("stroke", "red");
 
     // append circles
     
@@ -93,25 +93,25 @@ async function makeResponsive() {
         // .attr("stroke", "black");
 
     // Step 1: Initialize Tooltip
-//     const toolTip = d3.tip()
-//         .attr("class", "d3-tip")
-//         .offset([80, -60])
-//         .html(function(d) {
-//         return (`<strong>${d.abbr}<strong><hr> poverty rate: ${d.poverty}<hr> obesity rate: ${d.obesity}
-//         `);
-//         });
+    const toolTip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([80, -60])
+        .html(function(d) {
+        return (`<strong>${d.abbr}<strong><hr> poverty rate: ${d.poverty}<hr> obesity rate: ${d.obesity}
+        `);
+        });
 
-//     // Step 2: Create the tooltip in chartGroup.
-//     chartGroup.call(toolTip);
+    // Step 2: Create the tooltip in chartGroup.
+    chartGroup.call(toolTip);
 
-//     // Step 3: Create "mouseover" event listener to display tooltip
-//     circlesGroup.on("mouseover", function(d) {
-//         toolTip.show(d, this);
-//     })
-//     // Step 4: Create "mouseout" event listener to hide tooltip
-//         .on("mouseout", function(d) {
-//         toolTip.hide(d);
-//         });
+    // Step 3: Create "mouseover" event listener to display tooltip
+    circlesGroup.on("mouseover", function(d) {
+        toolTip.show(d, this);
+    })
+    // Step 4: Create "mouseout" event listener to hide tooltip
+        .on("mouseout", function(d) {
+        toolTip.hide(d);
+        });
 }
 
 // When the browser loads, makeResponsive() is called.
